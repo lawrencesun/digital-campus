@@ -1,0 +1,77 @@
+{
+  "terrain": {
+    "size": 200,
+    "color": 4884185,
+    "segments": 40
+  },
+  "roads": [
+    {
+      "points": [
+        { "x": -60, "z": 0 },
+        { "x": -30, "z": 0 },
+        { "x": 0, "z": 0 },
+        { "x": 30, "z": 0 },
+        { "x": 60, "z": 0 }
+      ],
+      "width": 5,
+      "color": 5592405
+    },
+    {
+      "points": [
+        { "x": 0, "z": -60 },
+        { "x": 0, "z": -30 },
+        { "x": 0, "z": 0 },
+        { "x": 0, "z": 30 },
+        { "x": 0, "z": 60 }
+      ],
+      "width": 5,
+      "color": 5592405
+    },
+    {
+      "points": [
+        { "x": -50, "z": -30 },
+        { "x": -20, "z": -30 },
+        { "x": 20, "z": -30 },
+        { "x": 50, "z": -30 }
+      ],
+      "width": 3,
+      "color": 5000268
+    },
+    {
+      "points": [
+        { "x": -50, "z": 30 },
+        { "x": -20, "z": 30 },
+        { "x": 20, "z": 30 },
+        { "x": 50, "z": 30 }
+      ],
+      "width": 3,
+      "color": 5000268
+    }
+  ],
+  "vegetation": {
+    "trees": [
+      { "x": -10, "z": -8, "trunkHeight": 2.5, "crownRadius": 2 },
+      { "x": 10, "z": -8, "trunkHeight": 3, "crownRadius": 1.8 },
+      { "x": -28, "z": 5, "trunkHeight": 2, "crownRadius": 1.5 },
+      { "x": 28, "z": 5, "trunkHeight": 2.5, "crownRadius": 2 },
+      { "x": -12, "z": 15, "trunkHeight": 3, "crownRadius": 2.2 },
+      { "x": 12, "z": 15, "trunkHeight": 2, "crownRadius": 1.5 },
+      { "x": -50, "z": -20, "trunkHeight": 2.5, "crownRadius": 1.8 },
+      { "x": -55, "z": -10, "trunkHeight": 3, "crownRadius": 2 },
+      { "x": 50, "z": -20, "trunkHeight": 2, "crownRadius": 1.5 },
+      { "x": 55, "z": -10, "trunkHeight": 2.5, "crownRadius": 1.8 },
+      { "x": -50, "z": 20, "trunkHeight": 3, "crownRadius": 2 },
+      { "x": -55, "z": 35, "trunkHeight": 2.5, "crownRadius": 1.8 },
+      { "x": 50, "z": 20, "trunkHeight": 2, "crownRadius": 1.5 },
+      { "x": 55, "z": 35, "trunkHeight": 2.5, "crownRadius": 2 },
+      { "x": -45, "z": 12, "trunkHeight": 2.8, "crownRadius": 1.7 },
+      { "x": 10, "z": 45, "trunkHeight": 2.5, "crownRadius": 2 },
+      { "x": -5, "z": 45, "trunkHeight": 3, "crownRadius": 1.8 },
+      { "x": 30, "z": 12, "trunkHeight": 2, "crownRadius": 1.5 },
+      { "x": -30, "z": -25, "trunkHeight": 2.5, "crownRadius": 1.8 },
+      { "x": 30, "z": -25, "trunkHeight": 3, "crownRadius": 2 }
+    ]
+  },
+  "skyTopColor": 4488cc,
+  "skyBottomColor": c8dde6
+}

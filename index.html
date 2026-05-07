@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>校园数字孪生系统</title>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <div id="app">
+    <canvas id="scene-canvas"></canvas>
+
+    <div id="loading-screen">
+      <div class="loading-content">
+        <h1>校园数字孪生系统</h1>
+        <div class="progress-bar-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <p id="loading-text">正在加载场景资源...</p>
+      </div>
+    </div>
+
+    <div id="toolbar" class="ui-hidden">
+      <button class="tool-btn" data-action="reset-camera" title="重置视角">
+        <span>&#8962;</span>
+      </button>
+      <button class="tool-btn" data-action="toggle-bird-eye" title="鸟瞰视角">
+        <span>&#9992;</span>
+      </button>
+      <button class="tool-btn" data-action="toggle-layers" title="图层控制">
+        <span>&#9776;</span>
+      </button>
+      <button class="tool-btn" data-action="toggle-minimap" title="小地图">
+        <span>&#9635;</span>
+      </button>
+    </div>
+
+    <div id="layer-panel" class="ui-hidden">
+      <h3>图层控制</h3>
+      <div class="layer-item">
+        <label><input type="checkbox" checked data-layer="buildings" /> 建筑物</label>
+      </div>
+      <div class="layer-item">
+        <label><input type="checkbox" checked data-layer="roads" /> 道路</label>
+      </div>
+      <div class="layer-item">
+        <label><input type="checkbox" checked data-layer="vegetation" /> 植被</label>
+      </div>
+      <div class="layer-item">
+        <label><input type="checkbox" checked data-layer="terrain" /> 地面</label>
+      </div>
+    </div>
+
+    <div id="info-panel" class="ui-hidden">
+      <button id="info-panel-close">&times;</button>
+      <h2 id="info-panel-title"></h2>
+      <div id="info-panel-body"></div>
+    </div>
+
+    <div id="minimap-container" class="ui-hidden">
+      <canvas id="minimap-canvas" width="200" height="200"></canvas>
+    </div>
+
+    <div id="status-bar" class="ui-hidden">
+      <span id="status-fps">FPS: --</span>
+      <span id="status-time"></span>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
