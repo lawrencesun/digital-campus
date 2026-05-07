@@ -27,61 +27,66 @@ class App {
   }
 
   async start() {
-    this.loadingScreen.setProgress(0.1);
+    try {
+      this.loadingScreen.setProgress(0.1);
 
-    this.engine.init();
+      this.engine.init();
 
-    this.orbitControls = new OrbitControlsAdapter(
-      this.engine.camera,
-      this.canvas
-    );
-    this.engine.onUpdate(() => this.orbitControls.update());
+      this.orbitControls = new OrbitControlsAdapter(
+        this.engine.camera,
+        this.canvas
+      );
+      this.engine.onUpdate(() => this.orbitControls.update());
 
-    this.loadingScreen.setProgress(0.2);
+      this.loadingScreen.setProgress(0.2);
 
-    const [buildingsData, campusConfig] = await Promise.all([
-      fetch('/data/buildings.json').then((r) => r.json()),
-      fetch('/data/campus-config.json').then((r) => r.json())
-    ]);
+      const [buildingsData, campusConfig] = await Promise.all([
+        fetch('/data/buildings.json').then((r) => r.json()),
+        fetch('/data/campus-config.json').then((r) => r.json())
+      ]);
 
-    this.loadingScreen.setProgress(0.4);
+      this.loadingScreen.setProgress(0.4);
 
-    const campusBuilder = new CampusBuilder(
-      this.engine.sceneManager,
-      this.modelManager
-    );
+      const campusBuilder = new CampusBuilder(
+        this.engine.sceneManager,
+        this.modelManager
+      );
 
-    await campusBuilder.build(buildingsData, campusConfig);
+      await campusBuilder.build(buildingsData, campusConfig);
 
-    this.loadingScreen.setProgress(0.8);
+      this.loadingScreen.setProgress(0.8);
 
-    for (const building of campusBuilder.buildings) {
-      this.engine.registerPickable(building);
-    }
-
-    this.loadingScreen.setProgress(0.9);
-
-    this.minimap.setBuildings(campusBuilder.buildings);
-
-    this._setupEventHandlers();
-    this._setupDayNight();
-    this._showUI();
-
-    this.loadingScreen.setProgress(1.0);
-
-    setTimeout(() => {
-      this.loadingScreen.hide();
-    }, 500);
-
-    this.engine.onUpdate((delta, elapsed) => {
-      this._updateFPS(delta);
-      if (this.dayNightCycle) {
-        this.dayNightCycle.update(delta);
+      for (const building of campusBuilder.buildings) {
+        this.engine.registerPickable(building);
       }
-      this.minimap.update();
-    });
 
-    this.engine.start();
+      this.loadingScreen.setProgress(0.9);
+
+      this.minimap.setBuildings(campusBuilder.buildings);
+
+      this._setupEventHandlers();
+      this._setupDayNight();
+      this._showUI();
+
+      this.loadingScreen.setProgress(1.0);
+
+      setTimeout(() => {
+        this.loadingScreen.hide();
+      }, 500);
+
+      this.engine.onUpdate((delta, elapsed) => {
+        this._updateFPS(delta);
+        if (this.dayNightCycle) {
+          this.dayNightCycle.update(delta);
+        }
+        this.minimap.update();
+      });
+
+      this.engine.start();
+    } catch (err) {
+      console.error('[App] Failed to start:', err);
+      this.loadingScreen.setText('加载失败: ' + err.message);
+    }
   }
 
   _setupEventHandlers() {
