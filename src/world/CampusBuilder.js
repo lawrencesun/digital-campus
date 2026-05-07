@@ -85,7 +85,8 @@ export class CampusBuilder {
     for (const data of externalBuildings) {
       this.modelManager.addToQueue(data.id, data.modelUrl, {
         position: { x: data.x || 0, y: 0, z: data.z || 0 },
-        scale: data.scale || 1
+        scale: data.scale || 1,
+        targetHeight: data.targetHeight || data.height || null
       });
     }
 
@@ -96,7 +97,16 @@ export class CampusBuilder {
       if (model) {
         const cloned = model.clone();
         cloned.userData.buildingId = data.id;
-        cloned.userData.buildingData = data;
+        if (model.userData.actualSize) {
+          cloned.userData.buildingData = {
+            ...data,
+            width: parseFloat(model.userData.actualSize.width.toFixed(1)),
+            depth: parseFloat(model.userData.actualSize.depth.toFixed(1)),
+            height: parseFloat(model.userData.actualSize.height.toFixed(1))
+          };
+        } else {
+          cloned.userData.buildingData = data;
+        }
         this.layers.buildings.add(cloned);
         this.buildings.push(cloned);
       }

@@ -57,6 +57,10 @@ class App {
 
       await campusBuilder.build(buildingsData, campusConfig);
 
+      this.loadingScreen.setProgress(0.5);
+
+      await campusBuilder.loadExternalModels();
+
       this.loadingScreen.setProgress(0.8);
 
       for (const building of campusBuilder.buildings) {
