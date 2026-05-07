@@ -24,9 +24,21 @@
       <button class="tool-btn" data-action="reset-camera" title="重置视角">
         <span>&#8962;</span>
       </button>
-      <button class="tool-btn" data-action="toggle-bird-eye" title="鸟瞰视角">
+      <button class="tool-btn" data-action="switch-view" title="视角切换">
         <span>&#9992;</span>
       </button>
+      <div id="view-panel" class="ui-hidden">
+        <h3>视角切换</h3>
+        <div class="view-item">
+          <button class="view-option active" data-view="overview">全景视角</button>
+        </div>
+        <div class="view-item">
+          <button class="view-option" data-view="birdEye">鸟瞰视角</button>
+        </div>
+        <div class="view-item">
+          <button class="view-option" data-view="roam">漫游视角</button>
+        </div>
+      </div>
       <button class="tool-btn" data-action="toggle-layers" title="图层控制">
         <span>&#9776;</span>
       </button>

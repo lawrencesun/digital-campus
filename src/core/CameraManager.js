@@ -11,7 +11,7 @@ export class CameraManager {
     this._presets = {
       birdEye: { position: new THREE.Vector3(0, 120, 0.1), target: new THREE.Vector3(0, 0, 0) },
       overview: { position: new THREE.Vector3(60, 50, 60), target: new THREE.Vector3(0, 0, 0) },
-      street: { position: new THREE.Vector3(0, 2, 20), target: new THREE.Vector3(0, 2, 0) }
+      roam: { position: new THREE.Vector3(0, 2, 20), target: new THREE.Vector3(0, 2, 0) }
     };
   }
 

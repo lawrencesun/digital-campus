@@ -7,6 +7,7 @@ import { Toolbar } from './ui/Toolbar.js';
 import { Minimap } from './ui/Minimap.js';
 import { LoadingScreen } from './ui/LoadingScreen.js';
 import { LayerPanel } from './ui/LayerPanel.js';
+import { ViewPanel } from './ui/ViewPanel.js';
 import { DayNightCycle } from './effects/DayNightCycle.js';
 import { formatTime } from './utils/helpers.js';
 
@@ -19,11 +20,13 @@ class App {
     this.toolbar = new Toolbar();
     this.minimap = new Minimap(this.engine.camera);
     this.layerPanel = new LayerPanel();
+    this.viewPanel = new ViewPanel();
     this.modelManager = new ModelManager();
     this.orbitControls = null;
     this.dayNightCycle = null;
     this.fpsFrames = 0;
     this.fpsTime = 0;
+    this.currentView = 'overview';
   }
 
   async start() {
@@ -111,16 +114,20 @@ class App {
     });
 
     this.toolbar.on('reset-camera', () => {
-      this.engine.cameraManager.applyPreset('overview', this.orbitControls.controls);
+      this._applyView('overview');
       this.infoPanel.hide();
     });
 
-    this.toolbar.on('toggle-bird-eye', (active) => {
+    this.toolbar.on('switch-view', (active) => {
       if (active) {
-        this.engine.cameraManager.applyPreset('birdEye', this.orbitControls.controls);
+        this.viewPanel.show();
       } else {
-        this.engine.cameraManager.applyPreset('overview', this.orbitControls.controls);
+        this.viewPanel.hide();
       }
+    });
+
+    this.viewPanel.onSelect((viewName) => {
+      this._applyView(viewName);
     });
 
     this.toolbar.on('toggle-layers', (active) => {
@@ -153,6 +160,41 @@ class App {
     });
   }
 
+  _applyView(viewName) {
+    const prev = this.currentView;
+    this.currentView = viewName;
+
+    this.viewPanel.setActive(viewName);
+
+    const controls = this.orbitControls.controls;
+
+    if (viewName === 'roam') {
+      controls.minDistance = 0.3;
+      controls.maxDistance = 15;
+      controls.maxPolarAngle = Math.PI / 2;
+      controls.enablePan = true;
+      this.engine.cameraManager.camera.fov = 70;
+      this.engine.cameraManager.camera.updateProjectionMatrix();
+      this.engine.cameraManager.applyPreset('roam', controls);
+    } else if (viewName === 'birdEye') {
+      controls.minDistance = 5;
+      controls.maxDistance = 200;
+      controls.maxPolarAngle = Math.PI / 2.05;
+      controls.enablePan = true;
+      this.engine.cameraManager.camera.fov = 60;
+      this.engine.cameraManager.camera.updateProjectionMatrix();
+      this.engine.cameraManager.applyPreset('birdEye', controls);
+    } else {
+      controls.minDistance = 5;
+      controls.maxDistance = 200;
+      controls.maxPolarAngle = Math.PI / 2.05;
+      controls.enablePan = true;
+      this.engine.cameraManager.camera.fov = 60;
+      this.engine.cameraManager.camera.updateProjectionMatrix();
+      this.engine.cameraManager.applyPreset('overview', controls);
+    }
+  }
+
   _setupDayNight() {
     this.dayNightCycle = new DayNightCycle(
       this.engine.scene,
@@ -175,6 +217,7 @@ class App {
 
   _showUI() {
     this.toolbar.show();
+    this._applyView('overview');
     const statusBar = document.getElementById('status-bar');
     statusBar.classList.remove('ui-hidden');
     statusBar.classList.add('ui-visible');

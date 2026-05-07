@@ -127,6 +127,61 @@ html, body {
 }
 
 /* ========== Layer Panel ========== */
+
+#view-panel {
+  position: absolute;
+  top: 96px;
+  left: 72px;
+  z-index: 100;
+  background: rgba(15, 25, 35, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 16px;
+  min-width: 140px;
+}
+
+#view-panel h3 {
+  font-size: 0.85rem;
+  color: #4fc3f7;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.view-item {
+  margin-bottom: 6px;
+}
+
+.view-item:last-child {
+  margin-bottom: 0;
+}
+
+.view-option {
+  width: 100%;
+  padding: 6px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  background: transparent;
+  color: #bbb;
+  font-size: 0.8rem;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.view-option:hover {
+  background: rgba(79, 195, 247, 0.1);
+  border-color: rgba(79, 195, 247, 0.3);
+  color: #4fc3f7;
+}
+
+.view-option.active {
+  background: rgba(79, 195, 247, 0.2);
+  border-color: #4fc3f7;
+  color: #4fc3f7;
+}
+
 #layer-panel {
   position: absolute;
   top: 16px;
